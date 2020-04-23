@@ -1,0 +1,29 @@
+<div class="card">
+    <mat-card class="details">
+      <mat-card-header>
+        <mat-card-title>
+          {{ productDetail?.volumeInfo?.title }}
+        </mat-card-title>
+        <mat-card-actions class="close-button">
+          <button class="btn btn-warning" (click)="closeProductDetail()">Close</button>
+        </mat-card-actions>
+      </mat-card-header>
+      <mat-card-content class="content">
+            <img [src]="productDetail?.volumeInfo?.imageLinks?.thumbnail">
+            <label>Rating:</label> <app-star-rating style="display: inline-block;"
+            [rating]="productDetail?.volumeInfo?.averageRating"></app-star-rating>
+            <label>Summary:</label>{{ productDetail?.searchInfo?.textSnippet}}
+            <label>Description:</label>{{ productDetail?.volumeInfo?.description}}
+            <label>Written By:</label> 
+            <span class="comma" *ngFor="let author of productDetail?.volumeInfo?.authors"> {{ author }}</span>
+      </mat-card-content>
+      <mat-card-actions *ngIf="pageInput === 'search'">
+        <button class="btn btn-primary" (click)="addtoCart()">Add To Cart</button>
+        <button class="btn btn-primary" style="margin-left: 25px;"(click)="openBillingPage()">Buy</button>
+      </mat-card-actions>
+      <mat-card-actions *ngIf="pageInput === 'cart'">
+        <button class="btn btn-primary" (click)="removeFromCart()">Remove from Cart</button>
+        <button class="btn btn-primary" style="margin-left: 25px;"(click)="openBillingPage()">Buy</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

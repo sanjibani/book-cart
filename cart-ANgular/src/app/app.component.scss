@@ -1,0 +1,43 @@
+.navbar-custom {
+    background-color:  #eee;
+    color: #2196F3;
+    height: 40px;
+    text-align: center;
+    font-size: 25px;
+  }
+  
+  .sidenav {
+    width: 225px;
+    position: fixed;
+    top: 40px;
+    height: -webkit-fill-available;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #064579;
+  }
+  
+  .main {
+    margin-left: 250px; 
+    font-size: 25px; 
+    padding: 0px 10px;
+  }
+  .badge {
+    position: absolute;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+  }
+  

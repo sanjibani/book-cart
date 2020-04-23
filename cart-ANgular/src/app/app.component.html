@@ -1,0 +1,22 @@
+<nav class='navbar-custom'>
+  {{title}}
+  </nav>
+  
+  <div class="sidenav">
+    <a routerLink="search">
+      <span>Search</span>
+    </a>
+    <a routerLink="cart">
+      <span>Cart</span>
+      <span class="badge" *ngIf="cart?.length>0">{{ cart?.length }}</span>
+    </a>
+    <a routerLink="collections">
+      <span>My Collections</span>
+      <span class="badge" *ngIf="collection?.length>0">{{ collection?.length}}</span>
+    </a>
+  </div>
+  
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+  

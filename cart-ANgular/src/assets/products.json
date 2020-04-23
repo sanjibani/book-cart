@@ -1,0 +1,57 @@
+[
+    {
+        "productId":1,
+        "Name":"AngularJs",
+        "rating":4,
+        "author":"Michelle Avery",
+        "price": "20",
+        "language":"English",
+        "summary":"Build features quickly with simple, declarative templates. Extend the template language with your own components and use a wide array of existing components. Get immediate Angular-specific help and feedback with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than trying to make the code work.",
+        "description":"Learn one way to build applications with Angular and reuse your code and abilities to build apps for any deployment target. For web, mobile web, native mobile and native desktop.",
+        "publisher": "AngularIO"
+    },
+    {
+        "productId":2,
+        "Name":"Angular2",
+        "rating":4,
+        "price": "30",
+        "author":"Michelle Avery",
+        "language":"English",
+        "summary":"Build features quickly with simple, declarative templates. Extend the template language with your own components and use a wide array of existing components. Get immediate Angular-specific help and feedback with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than trying to make the code work.",
+        "description":"Learn one way to build applications with Angular and reuse your code and abilities to build apps for any deployment target. For web, mobile web, native mobile and native desktop.",
+        "publisher": "AngularIO"
+    },
+    {
+        "productId":3,
+        "Name":"Angular3",
+        "price": "30",
+        "rating":5,
+        "author":"Michelle Avery",
+        "summary":"Build features quickly with simple, declarative templates. Extend the template language with your own components and use a wide array of existing components. Get immediate Angular-specific help and feedback with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than trying to make the code work.",
+        "language":"English",
+        "description":"Learn one way to build applications with Angular and reuse your code and abilities to build apps for any deployment target. For web, mobile web, native mobile and native desktop.",
+        "publisher": "AngularIO"
+    },
+    {
+        "productId":4,
+        "Name":"Angular4",
+        "price": "35",
+        "rating":4,
+        "author":"Michelle Avery",
+        "language":"English",
+        "summary":"Build features quickly with simple, declarative templates. Extend the template language with your own components and use a wide array of existing components. Get immediate Angular-specific help and feedback with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than trying to make the code work.",
+        "description":"Learn one way to build applications with Angular and reuse your code and abilities to build apps for any deployment target. For web, mobile web, native mobile and native desktop.",
+        "publisher": "AngularIO"
+    },
+    {
+        "productId":5,
+        "Name":"Angular5",
+        "rating":3,
+        "author":"Michelle Avery",
+        "price": "30",
+        "language":"English",
+        "summary":"Build features quickly with simple, declarative templates. Extend the template language with your own components and use a wide array of existing components. Get immediate Angular-specific help and feedback with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than trying to make the code work.",
+        "description":"Learn one way to build applications with Angular and reuse your code and abilities to build apps for any deployment target. For web, mobile web, native mobile and native desktop.",
+        "publisher": "AngularIO"
+    }
+]
