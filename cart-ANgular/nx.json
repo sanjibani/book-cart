@@ -1,0 +1,45 @@
+{
+  "npmScope": "cart-angular",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "cart-angular": {
+      "tags": []
+    },
+    "cart-angular-e2e": {
+      "tags": [],
+      "implicitDependencies": ["cart-angular"]
+    },
+    "shared": {
+      "tags": []
+    },
+    "types": {
+      "tags": []
+    },
+    "cart-state": {
+      "tags": []
+    },
+    "search-state": {
+      "tags": []
+    },
+    "mock-data": {
+      "tags": []
+    }
+  }
+}

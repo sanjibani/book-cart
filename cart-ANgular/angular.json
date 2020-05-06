@@ -1,43 +1,39 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
-    "cart-ANgular": {
+    "cart-angular": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
+        "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "root": "apps/cart-angular",
+      "sourceRoot": "apps/cart-angular/src",
+      "prefix": "cart-angular",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cart-ANgular",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/cart-angular",
+            "index": "apps/cart-angular/src/index.html",
+            "main": "apps/cart-angular/src/main.ts",
+            "polyfills": "apps/cart-angular/src/polyfills.ts",
+            "tsConfig": "apps/cart-angular/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/cart-angular/src/favicon.ico",
+              "apps/cart-angular/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/cart-angular/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/cart-angular/src/environments/environment.ts",
+                  "with": "apps/cart-angular/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -66,67 +62,241 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cart-ANgular:build"
+            "browserTarget": "cart-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cart-ANgular:build:production"
+              "browserTarget": "cart-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cart-ANgular:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "browserTarget": "cart-angular:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/cart-angular/tsconfig.app.json",
+              "apps/cart-angular/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/cart-angular/**"]
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "test": {
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cart-ANgular:serve"
+            "jestConfig": "apps/cart-angular/jest.config.js",
+            "tsConfig": "apps/cart-angular/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/cart-angular/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "cart-angular-e2e": {
+      "root": "apps/cart-angular-e2e",
+      "sourceRoot": "apps/cart-angular-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cart-angular-e2e/cypress.json",
+            "tsConfig": "apps/cart-angular-e2e/tsconfig.e2e.json",
+            "devServerTarget": "cart-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cart-ANgular:serve:production"
+              "devServerTarget": "cart-angular:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/cart-angular-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/cart-angular-e2e/**"]
+          }
+        }
+      }
+    },
+    "shared": {
+      "projectType": "library",
+      "root": "libs/shared",
+      "sourceRoot": "libs/shared/src",
+      "prefix": "cart-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/tsconfig.lib.json",
+              "libs/shared/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/jest.config.js",
+            "tsConfig": "libs/shared/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "types": {
+      "projectType": "library",
+      "root": "libs/types",
+      "sourceRoot": "libs/types/src",
+      "prefix": "cart-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/types/tsconfig.lib.json",
+              "libs/types/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/types/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/types/jest.config.js",
+            "tsConfig": "libs/types/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/types/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "cart-state": {
+      "projectType": "library",
+      "root": "libs/cart-state",
+      "sourceRoot": "libs/cart-state/src",
+      "prefix": "cart-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/cart-state/tsconfig.lib.json",
+              "libs/cart-state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/cart-state/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/cart-state/jest.config.js",
+            "tsConfig": "libs/cart-state/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/cart-state/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "search-state": {
+      "projectType": "library",
+      "root": "libs/search-state",
+      "sourceRoot": "libs/search-state/src",
+      "prefix": "cart-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/search-state/tsconfig.lib.json",
+              "libs/search-state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/search-state/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/search-state/jest.config.js",
+            "tsConfig": "libs/search-state/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/search-state/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "mock-data": {
+      "projectType": "library",
+      "root": "libs/mock-data",
+      "sourceRoot": "libs/mock-data/src",
+      "prefix": "cart-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mock-data/tsconfig.lib.json",
+              "libs/mock-data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/mock-data/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mock-data/jest.config.js",
+            "tsConfig": "libs/mock-data/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/mock-data/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
   },
-  "defaultProject": "cart-ANgular",
   "cli": {
+    "defaultCollection": "@nrwl/angular",
     "analytics": false
-  }
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "cart-angular"
 }
