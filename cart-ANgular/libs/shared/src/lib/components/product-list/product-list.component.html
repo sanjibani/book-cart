@@ -19,7 +19,7 @@
             <span class="comma" *ngFor="let author of product?.volumeInfo?.authors"> {{ author }}</span>
       </mat-card-content>
 
-      <mat-card-actions *ngIf="pageInput === 'cart'">
+      <mat-card-actions class= "card-actions" *ngIf="pageInput === 'cart'">
         <button class="btn btn-primary" (click)="removeFromCart(product)">Remove from Cart</button>
         <button class="btn btn-primary" style="margin-left: 25px;"(click)="openBillingPage(product)">Buy</button>
       </mat-card-actions>

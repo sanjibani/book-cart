@@ -1,43 +1,47 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-
-const storeMock = {
-  select() {
-    return of({ cartList: [], collectionList: [] });
-  }
-};
+import * as fromProduct from '@cart-angular/cart-state';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let store: MockStore<fromProduct.State>;
+  const initialState = {
+    cartInfo: {
+      cartList: [],
+      collectionList: []
+    }
+  } as fromProduct.State
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
         AppComponent
       ],
-      providers: [
-        { 
-          provide: Store,
-          useValue: storeMock
-        }
-      ]
+      providers: [provideMockStore({ initialState })]
     }).compileComponents();
+
+    store = TestBed.inject(MockStore);
+
   }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should have as title 'Cart-Angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Cart-Angular');
+    expect(component.title).toEqual('Cart-Angular');
   });
   
 });

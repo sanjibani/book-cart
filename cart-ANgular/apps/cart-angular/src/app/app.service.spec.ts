@@ -18,6 +18,15 @@ describe('AppService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('toggle Message Flag after 2 seconds', () => {
+    service.messageSuccess = true;
+
+    service.toggleMessageWindow();
+    setTimeout(() => {
+      expect(service.messageSuccess).toBeFalsy();
+    }, 2000)
+  })
+
   it('able to retrieve products from the API via GET', () => {
     const mockProducts = mock.productsData;
     const mockSearch = 'angular';

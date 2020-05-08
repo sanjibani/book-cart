@@ -31,7 +31,7 @@
       (openBillPage)="openBillPage($event)" (closeProduct)="closeProduct()"></cart-angular-product-detail>
 </div>
 
-<div class="billingPage" *ngIf="!viewFlag && billingFlag">
-  <cart-angular-billing-page [productDetail]="productDetail" (closeProduct)="closeProduct()">
+<div *ngIf="!viewFlag && billingFlag">
+  <cart-angular-billing-page class="billingPage" [productDetail]="productDetail" (closeProduct)="closeProduct()">
   </cart-angular-billing-page>
 </div>

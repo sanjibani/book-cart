@@ -1,47 +1,47 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { Store, ReducerManagerDispatcher, ReducerManager, StoreModule } from '@ngrx/store';
-import * as mock from '@cart-angular/mock-data';
+import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '@cart-angular/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { product } from '@cart-angular/mock-data';
-import { By } from '@angular/platform-browser';
 import { AppService } from '../../../app.service';
-import { of } from 'rxjs';
 import { CartMainComponent } from './cart-main.component';
-
-
-const storeMock = {
-    select() {
-      return of({ cartList: [] });
-    }
-  };
-  
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import * as fromProduct from '@cart-angular/cart-state';
+import { reducer } from '@cart-angular/cart-state';
+import { By } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 describe('CartComponent:', () => {
   let component: CartMainComponent;
   let fixture: ComponentFixture<CartMainComponent>;
+  let store: MockStore<fromProduct.State>
   let appService: AppService;
-  const mockData = mock.productsData.items;
+  const initialState = {
+    cartInfo: {
+      cartList: [],
+      collectionList: []
+    }
+  } as fromProduct.State
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormsModule,
-        HttpClientModule, SharedModule, StoreModule.forRoot({})],
+        HttpClientModule, SharedModule, StoreModule.forRoot({ feature: reducer })],
       declarations: [
         CartMainComponent
       ],
-      providers: [AppService,  ReducerManager, ReducerManagerDispatcher,
-        { 
-            provide: Store,
-            useValue: storeMock
-          }]
+      providers: [provideMockStore({ initialState })]
     }).compileComponents();
+
+    store = TestBed.inject(MockStore);
+    appService = TestBed.inject(AppService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CartMainComponent);
-    component = fixture.debugElement.componentInstance;
+    component = fixture.componentInstance;
+    fixture.detectChanges();
     appService = fixture.debugElement.injector.get(AppService);
   });
 
@@ -50,25 +50,41 @@ describe('CartComponent:', () => {
     expect(component).toBeTruthy();
   });
 
-//   it('should show the product detail component hiding search-main', () => {
-//     component.viewProduct(product);
+  it('should show the product detail component hiding search-main', () => {
+    component.viewProduct(product);
 
-//     fixture.detectChanges();
-//     expect(fixture.debugElement.query(By.css('.product-detail'))).toBeTruthy();
-//   });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.product-detail'))).toBeTruthy();
+  });
 
-//   it('should open the Billing Page hiding search-main', () => {
-//     component.openBillPage(product);
+  it('should open the Billing Page hiding search-main', () => {
+    component.openBillPage(product);
 
-//     fixture.detectChanges();
-//     expect(fixture.debugElement.query(By.css('.billingPage'))).toBeTruthy();
-//   });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.billingPage'))).toBeTruthy();
+  });
 
-//   it('should close all the child components showing search-main component', () => {
-//     component.closeProduct();
+  it('should close all the child components showing search-main component', () => {
+    component.closeProduct();
 
-//     fixture.detectChanges();
-//     expect(fixture.debugElement.query(By.css('.cart-main'))).toBeTruthy();
-//   });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.cart-main'))).toBeTruthy();
+  });
+
+  it('should show success message on removing item from cart', () => {
+    component.removeProduct();
+
+    fixture.detectChanges();
+    expect(appService.messageSuccess).toBeTruthy();
+  });
+
+  it('should unsubscribe the subscription', () => {
+    component.cartSubscription$ = new Subscription();
+
+    spyOn(component.cartSubscription$, 'unsubscribe');
+    component.ngOnDestroy();
+    
+    expect(component.cartSubscription$.unsubscribe).toHaveBeenCalled();
+  })
 
 });

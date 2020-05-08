@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   @Output() viewEvent = new EventEmitter();
   @Output() addorRemove = new EventEmitter();
   @Output() openBillPage = new EventEmitter();
-  constructor(private store: Store<fromProduct.State>, public facade: CartFacade) { }
+  constructor( public facade: CartFacade) { }
 
   ngOnInit(): void {
   }
