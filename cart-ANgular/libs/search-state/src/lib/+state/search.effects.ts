@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { AppService } from '../../../../../apps/cart-angular/src/app/app.service';
-import * as searchActions from '@cart-angular/search-state';
+import * as searchActions from './search.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
-import { Action } from '@ngrx/store';
+import { of } from 'rxjs';
 
 @Injectable()
 export class SearchEffects {

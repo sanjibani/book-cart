@@ -1,6 +1,6 @@
 import { Product } from '@cart-angular/types';
 import * as fromRoot from '../../../../../apps/cart-angular/src/app/state/app.state';
-import { SearchActions, SearchActionTypes } from '@cart-angular/search-state';
+import { SearchActions, SearchActionTypes } from './search.actions';
 
 export interface State extends fromRoot.State {
     products: ProductState;

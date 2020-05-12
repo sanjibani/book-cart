@@ -1,7 +1,7 @@
 import { Product } from '@cart-angular/types';
 import * as fromRoot from '../../../../../apps/cart-angular/src/app/state/app.state';
 import { ProductCollection } from '@cart-angular/types';
-import { CartActions, CartActionTypes } from '@cart-angular/cart-state';
+import { CartActions, CartActionTypes } from './cart.actions';
 
 export interface CartState {
     cartList: Product [];

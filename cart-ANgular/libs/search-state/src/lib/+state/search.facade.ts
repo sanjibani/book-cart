@@ -1,7 +1,8 @@
 import { Store, select } from '@ngrx/store';
-import * as fromProduct from '@cart-angular/search-state';
+import * as fromProduct from './search.reducer';
+import * as searchSelectors from './search.selectors'
 import { Injectable } from '@angular/core';
-import * as searchActions from '@cart-angular/search-state';
+import * as searchActions from './search.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +11,9 @@ export class SearchFacade {
     
     constructor(private store: Store<fromProduct.State>) {}
 
-    searchString$ = this.store.pipe(select(fromProduct.getSearchString));
-    productList$ = this.store.pipe(select(fromProduct.getProductList));
-    error$ = this.store.pipe(select(fromProduct.getErrorResponse));
+    searchString$ = this.store.pipe(select(searchSelectors.getSearchString));
+    productList$ = this.store.pipe(select(searchSelectors.getProductList));
+    error$ = this.store.pipe(select(searchSelectors.getErrorResponse));
 
     loadProductstoStore(searchQuery) {
         this.dispatchSearchKeyToStore(searchQuery);
