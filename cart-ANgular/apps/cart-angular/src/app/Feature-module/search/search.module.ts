@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchMainComponent } from './components/search-main/search-main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+
+import { SearchMainComponent } from './components/search-main/search-main.component';
 import { reducer } from '@cart-angular/search-state';
 import { SharedModule } from '@cart-angular/shared';
-import { EffectsModule } from '@ngrx/effects';
+
 import { SearchEffects } from '@cart-angular/search-state';
 const routes: Routes = [
   {
     path: '',
     component: SearchMainComponent
-    }
+  }
 ];
 
 @NgModule({
@@ -27,4 +30,4 @@ const routes: Routes = [
     SharedModule
   ]
 })
-export class SearchModule { }
+export class SearchModule {}

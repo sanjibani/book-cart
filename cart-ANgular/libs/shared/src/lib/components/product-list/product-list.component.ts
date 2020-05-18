@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-// import { Product } from '../../../../../../apps/cart-angular/src/app/models/product.model';
-import { Product } from '@cart-angular/types';
-import * as fromProduct from '@cart-angular/cart-state';
-import * as cartActions from '@cart-angular/cart-state';
-import { Store } from '@ngrx/store';
+
+import { Product, AppConstants } from '@cart-angular/types';
 import { CartFacade } from '@cart-angular/cart-state';
 
 @Component({
@@ -12,19 +9,19 @@ import { CartFacade } from '@cart-angular/cart-state';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-
   @Input() pageInput;
   @Input() productList;
   @Output() viewEvent = new EventEmitter();
   @Output() addorRemove = new EventEmitter();
   @Output() openBillPage = new EventEmitter();
-  constructor( public facade: CartFacade) { }
+  constructor(public facade: CartFacade) {}
 
-  ngOnInit(): void {
-  }
+  appContants = AppConstants;
+
+  ngOnInit(): void {}
 
   viewProduct(product: Product) {
-      this.viewEvent.emit(product);
+    this.viewEvent.emit(product);
   }
 
   removeFromCart(product) {
@@ -36,5 +33,4 @@ export class ProductListComponent implements OnInit {
   openBillingPage(product) {
     this.openBillPage.emit(product);
   }
-
 }

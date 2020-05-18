@@ -1,34 +1,35 @@
 <div class="search-main" *ngIf="!viewFlag && !billingFlag">
-
   <div class="search-bar">
     <div class="search">
-    <form [formGroup]="searchForm" (submit)="searchHandle()">
-      <input type="text" class="searchTerm" formControlName="searchQuery" placeholder="Search">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </form>
-    
+      <form [formGroup]="searchForm" (submit)="searchHandle()">
+        <input type="text" class="searchTerm" formControlName="searchQuery" placeholder="Search" />
+        <button type="submit" class="searchButton">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
     </div>
- </div>
+  </div>
 
- <div *ngIf="errors" class="alert alert-danger custom">
-  Error: {{errors.error.error.message}}
-</div>
+  <div *ngIf="errors" class="alert alert-danger custom">Error: {{ errors.error.error.message }}</div>
 
- <div *ngIf="appService.messageSuccess" class="alert alert-success custom" role="alert">
-  Item added to Cart Successfully!
-</div>
- 
-<div style="margin-top: 30px;">
-  <cart-angular-product-list [productList]="products" (viewEvent)="viewProduct($event)">   
-  </cart-angular-product-list>
-</div>
+  <div *ngIf="appService.messageSuccess" class="alert alert-success custom" role="alert">
+    Item added to Cart Successfully!
+  </div>
+
+  <div style="margin-top: 30px;">
+    <cart-angular-product-list [productList]="products" (viewEvent)="viewProduct($event)"> </cart-angular-product-list>
+  </div>
 </div>
 
 <div *ngIf="viewFlag && !billingFlag">
-      <cart-angular-product-detail class="product-detail" [productDetail]="productDetail" [pageInput]="searchInput" (addorRemove)="addsuccess()"
-      (openBillPage)="openBillPage($event)" (closeProduct)="closeProduct()"></cart-angular-product-detail>
+  <cart-angular-product-detail
+    class="product-detail"
+    [productDetail]="productDetail"
+    [pageInput]="searchInput"
+    (addorRemove)="addsuccess()"
+    (openBillPage)="openBillPage($event)"
+    (closeProduct)="closeProduct()"
+  ></cart-angular-product-detail>
 </div>
 
 <div *ngIf="!viewFlag && billingFlag">

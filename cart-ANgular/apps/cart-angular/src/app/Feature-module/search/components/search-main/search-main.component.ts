@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { Product } from '@cart-angular/types';
 import { AppService } from '../../../../app.service';
-import { FormGroup, FormControl } from '@angular/forms';
 import { AppConstants } from '@cart-angular/types';
 import { SearchFacade } from '@cart-angular/search-state';
 
@@ -21,9 +22,7 @@ export class SearchMainComponent implements OnInit, OnDestroy {
   productSubscription$;
   errorSubscription$;
   searchInput = AppConstants.SEARCH_INPUT;
-  constructor(
-     public appService: AppService, 
-    public facade: SearchFacade ) { }
+  constructor(public appService: AppService, public facade: SearchFacade) {}
 
   searchForm = new FormGroup({
     searchQuery: new FormControl()
@@ -31,28 +30,19 @@ export class SearchMainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // get search string from store
-    this.searchSubscription$ = this.facade.searchString$
-    .subscribe(searchString => {
-        this.searchForm.get('searchQuery').setValue(searchString);
+    this.searchSubscription$ = this.facade.searchString$.subscribe(searchString => {
+      this.searchForm.get('searchQuery').setValue(searchString);
     });
 
     // get search results from store on success
-  this.productSubscription$ = this.facade.productList$
-  .subscribe(productList => {
-        this.products = productList;
+    this.productSubscription$ = this.facade.productList$.subscribe(productList => {
+      this.products = productList;
     });
 
-  // get error response from store on failure
-this.errorSubscription$ = this.facade.error$
-.subscribe(errors => {
+    // get error response from store on failure
+    this.errorSubscription$ = this.facade.error$.subscribe(errors => {
       this.errors = errors;
-  })
-  }
-
-  ngOnDestroy() {
-    this.searchSubscription$.unsubscribe();
-    this.productSubscription$.unsubscribe();
-    this.errorSubscription$.unsubscribe();
+    });
   }
 
   // dispatching the actions to change the state
@@ -80,5 +70,11 @@ this.errorSubscription$ = this.facade.error$
   openBillPage(product: Product) {
     this.viewFlag = false;
     this.billingFlag = true;
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription$.unsubscribe();
+    this.productSubscription$.unsubscribe();
+    this.errorSubscription$.unsubscribe();
   }
 }

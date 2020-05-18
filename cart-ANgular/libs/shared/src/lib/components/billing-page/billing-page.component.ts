@@ -1,11 +1,11 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProductCollection } from '@cart-angular/types';
-import { Store } from '@ngrx/store';
-import * as fromProduct from '@cart-angular/cart-state';
-import * as cartActions from '@cart-angular/cart-state';
-import { CartFacade } from '@cart-angular/cart-state';
 
+import { Store } from '@ngrx/store';
+
+import { ProductCollection } from '@cart-angular/types';
+import * as fromProduct from '@cart-angular/cart-state';
+import { CartFacade } from '@cart-angular/cart-state';
 
 @Component({
   selector: 'cart-angular-billing-page',
@@ -13,11 +13,10 @@ import { CartFacade } from '@cart-angular/cart-state';
   styleUrls: ['./billing-page.component.scss']
 })
 export class BillingPageComponent implements OnInit {
-
   purchaseFlag = false;
   @Input() productDetail;
   @Output() closeProduct = new EventEmitter();
-  constructor(private store: Store<fromProduct.State>, public facade: CartFacade) { }
+  constructor(private store: Store<fromProduct.State>, public facade: CartFacade) {}
 
   billingForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -26,11 +25,10 @@ export class BillingPageComponent implements OnInit {
     contact: new FormControl('', Validators.required)
   });
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
-    const purchasedProduct = new ProductCollection ();
+    const purchasedProduct = new ProductCollection();
     purchasedProduct.userName = this.billingForm.value.name;
     purchasedProduct.phone = this.billingForm.value.contact;
     purchasedProduct.email = this.billingForm.value.email;
@@ -40,8 +38,6 @@ export class BillingPageComponent implements OnInit {
   }
 
   addOrderDetails(purchasedProduct: ProductCollection) {
-    // this.store.dispatch(new cartActions.AddtoCollections(purchasedProduct));
-    // this.store.dispatch(new cartActions.RemovefromCart(this.productDetail));
     this.facade.dispatchProductsToCollection(purchasedProduct);
     this.facade.removeFromCart(this.productDetail);
     this.purchaseFlag = true;
@@ -50,5 +46,4 @@ export class BillingPageComponent implements OnInit {
   closeBillingPage() {
     this.closeProduct.emit();
   }
-
 }

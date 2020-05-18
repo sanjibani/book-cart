@@ -1,27 +1,27 @@
-<div
-  *ngFor="let product of productList"
-  style="display: inline-block; padding: 20px; margin-top: 30px;"
->
-<div class="card">
+<div *ngFor="let product of productList" style="display: inline-block; padding: 20px; margin-top: 30px;">
+  <div class="card">
     <mat-card class="details">
       <mat-card-header class="header">
         <mat-card-title style="font-size: 70%;">
           <a href="javascript:" (click)="viewProduct(product)">{{ product?.volumeInfo?.title }}</a>
-          <img [src]="product?.volumeInfo?.imageLinks?.thumbnail">
+          <img [src]="product?.volumeInfo?.imageLinks?.thumbnail" />
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="content">
-            <label>Rating:</label> <cart-angular-star-rating style="display: inline-block;"
-            [rating]="product?.volumeInfo?.averageRating"></cart-angular-star-rating>
-            <p>{{product?.searchInfo?.textSnippet}}</p>
-            <label>Publisher:</label> {{ product?.volumeInfo?.publisher}}<br>
-            <label>Written By:</label> 
-            <span class="comma" *ngFor="let author of product?.volumeInfo?.authors"> {{ author }}</span>
+        <label>Rating:</label>
+        <cart-angular-star-rating
+          style="display: inline-block;"
+          [rating]="product?.volumeInfo?.averageRating"
+        ></cart-angular-star-rating>
+        <p>{{ product?.searchInfo?.textSnippet }}</p>
+        <label>Publisher:</label> {{ product?.volumeInfo?.publisher }}<br />
+        <label>Written By:</label>
+        <span class="comma" *ngFor="let author of product?.volumeInfo?.authors"> {{ author }}</span>
       </mat-card-content>
 
-      <mat-card-actions class= "card-actions" *ngIf="pageInput === 'cart'">
+      <mat-card-actions class="card-actions" *ngIf="pageInput === appContants.CART_INPUT">
         <button class="btn btn-primary" (click)="removeFromCart(product)">Remove from Cart</button>
-        <button class="btn btn-primary" style="margin-left: 25px;"(click)="openBillingPage(product)">Buy</button>
+        <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage(product)">Buy</button>
       </mat-card-actions>
     </mat-card>
   </div>

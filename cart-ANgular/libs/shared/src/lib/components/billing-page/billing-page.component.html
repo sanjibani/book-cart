@@ -1,10 +1,6 @@
 <div class="card">
   <div class="details">
-    <button
-      class="btn btn-warning"
-      (click)="closeBillingPage()"
-      style="float: right;"
-    >
+    <button class="btn btn-warning" (click)="closeBillingPage()" style="float: right;">
       Close
     </button>
     <div *ngIf="!purchaseFlag">
@@ -15,10 +11,7 @@
             <label>Name:</label>
             <input type="text" class="form-control" formControlName="name" />
             <div
-              *ngIf="
-                billingForm.controls.name.touched &&
-                billingForm.controls.name.invalid
-              "
+              *ngIf="billingForm.controls.name.touched && billingForm.controls.name.invalid"
               class="alert alert-danger"
             >
               Name is Required
@@ -29,10 +22,7 @@
             <label>Email:</label>
             <input type="email" class="form-control" formControlName="email" />
             <div
-              *ngIf="
-                billingForm.controls.email.touched &&
-                billingForm.controls.email.invalid
-              "
+              *ngIf="billingForm.controls.email.touched && billingForm.controls.email.invalid"
               class="alert alert-danger"
             >
               Email is Required
@@ -41,16 +31,9 @@
 
           <div class="form-group">
             <label for="contactInfo">Contact Number:</label>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="contact"
-            />
+            <input type="number" class="form-control" formControlName="contact" />
             <div
-              *ngIf="
-                billingForm.controls.contact.touched &&
-                billingForm.controls.contact.invalid
-              "
+              *ngIf="billingForm.controls.contact.touched && billingForm.controls.contact.invalid"
               class="alert alert-danger"
             >
               Contact Number is Required
@@ -61,29 +44,21 @@
             <label>Address:</label>
             <input type="text" class="form-control" formControlName="address" />
             <div
-              *ngIf="
-                billingForm.controls.address.touched &&
-                billingForm.controls.address.invalid
-              "
+              *ngIf="billingForm.controls.address.touched && billingForm.controls.address.invalid"
               class="alert alert-danger"
             >
               Address is Required
             </div>
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-success"
-            [disabled]="billingForm.invalid"
-            (click)="onSubmit()"
-          >
+          <button type="submit" class="btn btn-success" [disabled]="billingForm.invalid" (click)="onSubmit()">
             Submit
           </button>
         </form>
       </div>
       <div class="column2">
         <h3>{{ productDetail?.volumeInfo?.title }}</h3>
-        <img [src]="productDetail?.volumeInfo?.imageLinks?.thumbnail">
+        <img [src]="productDetail?.volumeInfo?.imageLinks?.thumbnail" />
         <label>Description: </label>{{ productDetail?.searchInfo?.textSnippet }}
       </div>
     </div>

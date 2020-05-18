@@ -13,22 +13,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./cart-main.component.scss']
 })
 export class CartMainComponent implements OnInit, OnDestroy {
-
   viewFlag = false;
   billingFlag = false;
   productDetail: Product;
   componentActive = true;
   cartSubscription$: Subscription;
   cartInput = AppConstants.CART_INPUT;
-  constructor(private store: Store<fromProduct.State>, public appService: AppService, 
-    public facade: CartFacade) { }
+  constructor(private store: Store<fromProduct.State>, public appService: AppService, public facade: CartFacade) {}
 
   products = [];
   ngOnInit(): void {
-  this.cartSubscription$ = this.facade.cartProducts$
-  .subscribe(cartList => {
-    this.products = cartList;
-   });
+    this.cartSubscription$ = this.facade.cartProducts$.subscribe(cartList => {
+      this.products = cartList;
+    });
   }
 
   ngOnDestroy() {

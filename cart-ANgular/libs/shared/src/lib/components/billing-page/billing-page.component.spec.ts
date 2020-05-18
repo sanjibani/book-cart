@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { BillingPageComponent } from './billing-page.component';
-import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { StoreModule } from '@ngrx/store';
+
 import { productCollection } from '@cart-angular/mock-data';
-import { ComponentRef } from '@angular/core';
+import { BillingPageComponent } from './billing-page.component';
 
 describe('BillingPageComponent', () => {
   let component: BillingPageComponent;
@@ -12,11 +12,9 @@ describe('BillingPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-    imports: [StoreModule.forRoot({}),  ReactiveFormsModule,
-        FormsModule],
-      declarations: [ BillingPageComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({}), ReactiveFormsModule, FormsModule],
+      declarations: [BillingPageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,7 +33,7 @@ describe('BillingPageComponent', () => {
     component.closeBillingPage();
     fixture.detectChanges();
     expect(component.closeProduct.emit).toHaveBeenCalledWith();
-})
+  });
 
   it('should trigger addOrderdetails event', () => {
     component.purchaseFlag = false;
@@ -43,13 +41,13 @@ describe('BillingPageComponent', () => {
     component.addOrderDetails(productCollection);
     fixture.detectChanges();
     expect(component.purchaseFlag).toBeTruthy();
-  })
+  });
 
-  it('should trigger onsubmit action on button click', () => { 
+  it('should trigger onsubmit action on button click', () => {
     component.purchaseFlag = false;
     component.onSubmit();
 
     fixture.detectChanges();
     expect(component.purchaseFlag).toBeTruthy();
-  })
+  });
 });

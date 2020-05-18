@@ -1,17 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProductDetailComponent } from './product-detail.component';
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+
 import { StoreModule } from '@ngrx/store';
+
+import { ProductDetailComponent } from './product-detail.component';
 import { product } from '@cart-angular/mock-data';
 
 @Component({
-    selector: 'cart-angular-star-rating',
-    template: '<p>Mock Star Rating Component</p>'
-  })
+  selector: 'cart-angular-star-rating',
+  template: '<p>Mock Star Rating Component</p>'
+})
 class MockStarRatingComponent {
-    @Input() rating;
+  @Input() rating;
 }
 
 describe('ProductDetailComponent', () => {
@@ -20,10 +21,9 @@ describe('ProductDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [MatCardModule, StoreModule.forRoot({})],
-      declarations: [ ProductDetailComponent, MockStarRatingComponent ]
-    })
-    .compileComponents();
+      imports: [MatCardModule, StoreModule.forRoot({})],
+      declarations: [ProductDetailComponent, MockStarRatingComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -42,31 +42,30 @@ describe('ProductDetailComponent', () => {
     component.closeProductDetail();
     fixture.detectChanges();
     expect(component.closeProduct.emit).toHaveBeenCalled();
-})
+  });
 
-it('should emit the event Billing Page OUPUT', () => {
+  it('should emit the event Billing Page OUPUT', () => {
     component.productDetail = product;
     spyOn(component.openBillPage, 'emit');
 
     component.openBillingPage();
     fixture.detectChanges();
     expect(component.openBillPage.emit).toHaveBeenCalledWith(component.productDetail);
-})
+  });
 
-it('it should emit the addorRemove OUTPUT', () => {
+  it('it should emit the addorRemove OUTPUT', () => {
     spyOn(component.addorRemove, 'emit');
 
     component.removeFromCart();
     fixture.detectChanges();
     expect(component.addorRemove.emit).toHaveBeenCalled();
-})
+  });
 
-it('it should emit the addorRemove for addtocart method OUTPUT', () => {
+  it('it should emit the addorRemove for addtocart method OUTPUT', () => {
     spyOn(component.addorRemove, 'emit');
 
     component.addtoCart();
     fixture.detectChanges();
     expect(component.addorRemove.emit).toHaveBeenCalled();
-})
-
+  });
 });

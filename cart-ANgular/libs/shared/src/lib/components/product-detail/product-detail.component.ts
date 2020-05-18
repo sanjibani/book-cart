@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
 import * as fromProduct from '@cart-angular/cart-state';
-import * as cartActions from '@cart-angular/cart-state';
 import { CartFacade } from '@cart-angular/cart-state';
+import { AppConstants } from '@cart-angular/types';
 
 @Component({
   selector: 'cart-angular-product-detail',
@@ -10,16 +12,16 @@ import { CartFacade } from '@cart-angular/cart-state';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-
   @Input() pageInput;
   @Input() productDetail;
   @Output() closeProduct = new EventEmitter();
   @Output() addorRemove = new EventEmitter();
   @Output() openBillPage = new EventEmitter();
-  constructor(private store: Store<fromProduct.State>, public facade: CartFacade) { }
+  constructor(private store: Store<fromProduct.State>, public facade: CartFacade) {}
 
-  ngOnInit(): void {
-  }
+  appContants = AppConstants;
+
+  ngOnInit(): void {}
 
   closeProductDetail() {
     this.closeProduct.emit();
@@ -40,5 +42,4 @@ export class ProductDetailComponent implements OnInit {
     this.facade.removeFromCart(this.productDetail);
     this.addorRemove.emit();
   }
-
 }

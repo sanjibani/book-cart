@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+
 import * as fromProduct from '@cart-angular/cart-state';
 
 @Component({
@@ -7,8 +8,7 @@ import * as fromProduct from '@cart-angular/cart-state';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-
+export class AppComponent implements OnInit {
   title = 'Cart-Angular';
   cart;
   collection;

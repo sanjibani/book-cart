@@ -1,8 +1,10 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+
 import { AppComponent } from './app.component';
 import * as fromProduct from '@cart-angular/cart-state';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -13,21 +15,16 @@ describe('AppComponent', () => {
       cartList: [],
       collectionList: []
     }
-  } as fromProduct.State
+  } as fromProduct.State;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
       providers: [provideMockStore({ initialState })]
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
-
   }));
 
   beforeEach(() => {
@@ -43,5 +40,4 @@ describe('AppComponent', () => {
   it(`should have as title 'Cart-Angular'`, () => {
     expect(component.title).toEqual('Cart-Angular');
   });
-  
 });

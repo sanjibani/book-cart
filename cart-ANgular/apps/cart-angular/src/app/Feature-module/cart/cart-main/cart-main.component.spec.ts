@@ -15,22 +15,25 @@ import { Subscription } from 'rxjs';
 describe('CartComponent:', () => {
   let component: CartMainComponent;
   let fixture: ComponentFixture<CartMainComponent>;
-  let store: MockStore<fromProduct.State>
+  let store: MockStore<fromProduct.State>;
   let appService: AppService;
   const initialState = {
     cartInfo: {
       cartList: [],
       collectionList: []
     }
-  } as fromProduct.State
+  } as fromProduct.State;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule,
-        HttpClientModule, SharedModule, StoreModule.forRoot({ feature: reducer })],
-      declarations: [
-        CartMainComponent
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        SharedModule,
+        StoreModule.forRoot({ feature: reducer })
       ],
+      declarations: [CartMainComponent],
       providers: [provideMockStore({ initialState })]
     }).compileComponents();
 
@@ -44,7 +47,6 @@ describe('CartComponent:', () => {
     fixture.detectChanges();
     appService = fixture.debugElement.injector.get(AppService);
   });
-
 
   it('should create the app', () => {
     expect(component).toBeTruthy();
@@ -83,8 +85,7 @@ describe('CartComponent:', () => {
 
     spyOn(component.cartSubscription$, 'unsubscribe');
     component.ngOnDestroy();
-    
-    expect(component.cartSubscription$.unsubscribe).toHaveBeenCalled();
-  })
 
+    expect(component.cartSubscription$.unsubscribe).toHaveBeenCalled();
+  });
 });

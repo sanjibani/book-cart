@@ -3,45 +3,43 @@ import * as fromRoot from '../../../../../apps/cart-angular/src/app/state/app.st
 import { SearchActions, SearchActionTypes } from './search.actions';
 
 export interface State extends fromRoot.State {
-    products: ProductState;
+  products: ProductState;
 }
 export interface ProductState {
-    searchString: string;
-    productList: Product [];
-    error: any;
+  searchString: string;
+  productList: Product[];
+  error: any;
 }
 
 export const initialState: ProductState = {
-    productList: [],
-    searchString: '',
-    error: null
+  productList: [],
+  searchString: '',
+  error: null
 };
 
 export function reducer(state = initialState, action: SearchActions): ProductState {
-    switch (action.type) {
+  switch (action.type) {
+    case SearchActionTypes.SearchQuery:
+      return {
+        ...state,
+        searchString: action.payload
+      };
 
-        case SearchActionTypes.SearchQuery:
-            return {
-                ...state,
-                searchString: action.payload
-            };
+    case SearchActionTypes.LoadSuccess:
+      return {
+        ...state,
+        productList: action.payload,
+        error: null
+      };
 
-        case SearchActionTypes.LoadSuccess:
-            return {
-                ...state,
-                productList: action.payload,
-                error: null
-            };
+    case SearchActionTypes.LoadFailure:
+      return {
+        ...state,
+        productList: [],
+        error: action.payload
+      };
 
-        case SearchActionTypes.LoadFailure:
-            return {
-                ...state,
-                productList: [],
-                error: action.payload
-            };
-
-            default:
-                return state;
-    }
-
+    default:
+      return state;
+  }
 }
