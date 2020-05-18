@@ -41,11 +41,8 @@ describe('Collection Component:', () => {
   });
 
   it('should unsubscribe the subscription', () => {
-    component.collectionSubscription$ = new Subscription();
-
-    spyOn(component.collectionSubscription$, 'unsubscribe');
+    spyOn(Subscription.prototype, 'unsubscribe');
     component.ngOnDestroy();
-
-    expect(component.collectionSubscription$.unsubscribe).toHaveBeenCalled();
+    expect(Subscription.prototype.unsubscribe).toHaveBeenCalled();
   });
 });

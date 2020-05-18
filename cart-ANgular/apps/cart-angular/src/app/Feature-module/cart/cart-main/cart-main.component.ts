@@ -5,7 +5,8 @@ import { AppService } from '../../../app.service';
 import * as fromProduct from '@cart-angular/cart-state';
 import { AppConstants } from '@cart-angular/types';
 import { CartFacade } from '@cart-angular/cart-state';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'cart-angular-cart-main',
@@ -18,18 +19,15 @@ export class CartMainComponent implements OnInit, OnDestroy {
   productDetail: Product;
   componentActive = true;
   cartSubscription$: Subscription;
-  cartInput = AppConstants.CART_INPUT;
+  appConstants = AppConstants;
+  unSubscribe = new Subject<void>();
   constructor(private store: Store<fromProduct.State>, public appService: AppService, public facade: CartFacade) {}
 
   products = [];
   ngOnInit(): void {
-    this.cartSubscription$ = this.facade.cartProducts$.subscribe(cartList => {
+    this.cartSubscription$ = this.facade.cartProducts$.pipe(takeUntil(this.unSubscribe)).subscribe(cartList => {
       this.products = cartList;
     });
-  }
-
-  ngOnDestroy() {
-    this.cartSubscription$.unsubscribe();
   }
 
   viewProduct(product: Product) {
@@ -53,5 +51,11 @@ export class CartMainComponent implements OnInit, OnDestroy {
     this.closeProduct();
     this.appService.messageSuccess = true;
     this.appService.toggleMessageWindow();
+  }
+
+  ngOnDestroy() {
+    // this.cartSubscription$.unsubscribe();
+    this.unSubscribe.next();
+    this.unSubscribe.complete();
   }
 }

@@ -12,11 +12,11 @@
         <label>Written By:</label>
         <span class="comma" *ngFor="let author of product.productDetails?.volumeInfo?.authors"> {{ author }}</span>
 
-        <h3>Billing-Info</h3>
-        <label>Name:</label> {{ product.userName }}<br />
-        <label>Phone:</label> {{ product.phone }}<br />
-        <label>Email:</label> {{ product.email }}<br />
-        <label>Address:</label> {{ product.address }}
+        <h3>{{ appConstants.BILLING_PAGE.TITLE }}</h3>
+        <label>{{ appConstants.BILLING_PAGE.NAME }}</label> {{ product.userName }}<br />
+        <label>{{ appConstants.BILLING_PAGE.CONTACT }}</label> {{ product.phone }}<br />
+        <label>{{ appConstants.BILLING_PAGE.EMAIL }}</label> {{ product.email }}<br />
+        <label>{{ appConstants.BILLING_PAGE.ADDRESS }}</label> {{ product.address }}
       </mat-card-content>
     </mat-card>
   </div>

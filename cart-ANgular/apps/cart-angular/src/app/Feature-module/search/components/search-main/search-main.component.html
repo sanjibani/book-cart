@@ -13,7 +13,7 @@
   <div *ngIf="errors" class="alert alert-danger custom">Error: {{ errors.error.error.message }}</div>
 
   <div *ngIf="appService.messageSuccess" class="alert alert-success custom" role="alert">
-    Item added to Cart Successfully!
+    {{ appConstants.ADD_SUCCESS }}
   </div>
 
   <div style="margin-top: 30px;">
@@ -25,7 +25,7 @@
   <cart-angular-product-detail
     class="product-detail"
     [productDetail]="productDetail"
-    [pageInput]="searchInput"
+    [pageInput]="appConstants.SEARCH_INPUT"
     (addorRemove)="addsuccess()"
     (openBillPage)="openBillPage($event)"
     (closeProduct)="closeProduct()"

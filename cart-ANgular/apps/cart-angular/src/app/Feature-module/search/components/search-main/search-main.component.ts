@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { Product } from '@cart-angular/types';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { AppService } from '../../../../app.service';
+import { Product } from '@cart-angular/types';
 import { AppConstants } from '@cart-angular/types';
 import { SearchFacade } from '@cart-angular/search-state';
 
@@ -18,10 +21,8 @@ export class SearchMainComponent implements OnInit, OnDestroy {
   productDetail: Product;
   products: Product[];
   errors;
-  searchSubscription$;
-  productSubscription$;
-  errorSubscription$;
-  searchInput = AppConstants.SEARCH_INPUT;
+  unSubscribe = new Subject<void>();
+  appConstants = AppConstants;
   constructor(public appService: AppService, public facade: SearchFacade) {}
 
   searchForm = new FormGroup({
@@ -30,17 +31,17 @@ export class SearchMainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // get search string from store
-    this.searchSubscription$ = this.facade.searchString$.subscribe(searchString => {
+    this.facade.searchString$.pipe(takeUntil(this.unSubscribe)).subscribe(searchString => {
       this.searchForm.get('searchQuery').setValue(searchString);
     });
 
     // get search results from store on success
-    this.productSubscription$ = this.facade.productList$.subscribe(productList => {
+    this.facade.productList$.pipe(takeUntil(this.unSubscribe)).subscribe(productList => {
       this.products = productList;
     });
 
     // get error response from store on failure
-    this.errorSubscription$ = this.facade.error$.subscribe(errors => {
+    this.facade.error$.pipe(takeUntil(this.unSubscribe)).subscribe(errors => {
       this.errors = errors;
     });
   }
@@ -73,8 +74,7 @@ export class SearchMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.searchSubscription$.unsubscribe();
-    this.productSubscription$.unsubscribe();
-    this.errorSubscription$.unsubscribe();
+    this.unSubscribe.next();
+    this.unSubscribe.complete();
   }
 }

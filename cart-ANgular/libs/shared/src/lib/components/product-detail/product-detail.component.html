@@ -10,23 +10,28 @@
     </mat-card-header>
     <mat-card-content class="content">
       <img [src]="productDetail?.volumeInfo?.imageLinks?.thumbnail" />
-      <label>Rating:</label>
+      <label>{{ appContants.PRODUCT_LABEL.RATING }}</label>
       <cart-angular-star-rating
         style="display: inline-block;"
         [rating]="productDetail?.volumeInfo?.averageRating"
       ></cart-angular-star-rating>
-      <label>Summary:</label>{{ productDetail?.searchInfo?.textSnippet }} <label>Description:</label
+      <label>{{ appContants.PRODUCT_LABEL.SUMMARY }}</label
+      >{{ productDetail?.searchInfo?.textSnippet }} <label>{{ appContants.PRODUCT_LABEL.DESC }}</label
       >{{ productDetail?.volumeInfo?.description }}
-      <label>Written By:</label>
+      <label>{{ appContants.PRODUCT_LABEL.AUTHOR }}</label>
       <span class="comma" *ngFor="let author of productDetail?.volumeInfo?.authors"> {{ author }}</span>
     </mat-card-content>
     <mat-card-actions *ngIf="pageInput === appContants.SEARCH_INPUT">
-      <button class="btn btn-primary" (click)="addtoCart()">Add To Cart</button>
-      <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage()">Buy</button>
+      <button class="btn btn-primary" (click)="addtoCart()">{{ appContants.ADD }}</button>
+      <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage()">
+        {{ appContants.BUY }}
+      </button>
     </mat-card-actions>
     <mat-card-actions *ngIf="pageInput === appContants.CART_INPUT">
-      <button class="btn btn-primary" (click)="removeFromCart()">Remove from Cart</button>
-      <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage()">Buy</button>
+      <button class="btn btn-primary" (click)="removeFromCart()">{{ appContants.REMOVE }}</button>
+      <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage()">
+        {{ appContants.BUY }}
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -25,7 +25,6 @@ export class ProductListComponent implements OnInit {
   }
 
   removeFromCart(product) {
-    // this.store.dispatch(new cartActions.RemovefromCart(product));
     this.facade.removeFromCart(product);
     this.addorRemove.emit();
   }

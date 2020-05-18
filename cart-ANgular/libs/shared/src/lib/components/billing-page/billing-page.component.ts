@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import { ProductCollection } from '@cart-angular/types';
+import { ProductCollection, AppConstants } from '@cart-angular/types';
 import * as fromProduct from '@cart-angular/cart-state';
 import { CartFacade } from '@cart-angular/cart-state';
 
@@ -16,6 +16,7 @@ export class BillingPageComponent implements OnInit {
   purchaseFlag = false;
   @Input() productDetail;
   @Output() closeProduct = new EventEmitter();
+  appConstants = AppConstants;
   constructor(private store: Store<fromProduct.State>, public facade: CartFacade) {}
 
   billingForm = new FormGroup({

@@ -81,11 +81,8 @@ describe('CartComponent:', () => {
   });
 
   it('should unsubscribe the subscription', () => {
-    component.cartSubscription$ = new Subscription();
-
-    spyOn(component.cartSubscription$, 'unsubscribe');
+    spyOn(Subscription.prototype, 'unsubscribe');
     component.ngOnDestroy();
-
-    expect(component.cartSubscription$.unsubscribe).toHaveBeenCalled();
+    expect(Subscription.prototype.unsubscribe).toHaveBeenCalled();
   });
 });

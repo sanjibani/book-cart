@@ -8,20 +8,22 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="content">
-        <label>Rating:</label>
+        <label>{{ appContants.PRODUCT_LABEL.RATING }}</label>
         <cart-angular-star-rating
           style="display: inline-block;"
           [rating]="product?.volumeInfo?.averageRating"
         ></cart-angular-star-rating>
         <p>{{ product?.searchInfo?.textSnippet }}</p>
-        <label>Publisher:</label> {{ product?.volumeInfo?.publisher }}<br />
-        <label>Written By:</label>
+        <label>{{ appContants.PRODUCT_LABEL.PUBLISHER }}</label> {{ product?.volumeInfo?.publisher }}<br />
+        <label>{{ appContants.PRODUCT_LABEL.AUTHOR }}</label>
         <span class="comma" *ngFor="let author of product?.volumeInfo?.authors"> {{ author }}</span>
       </mat-card-content>
 
       <mat-card-actions class="card-actions" *ngIf="pageInput === appContants.CART_INPUT">
-        <button class="btn btn-primary" (click)="removeFromCart(product)">Remove from Cart</button>
-        <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage(product)">Buy</button>
+        <button class="btn btn-primary" (click)="removeFromCart(product)">{{ appContants.REMOVE }}</button>
+        <button class="btn btn-primary" style="margin-left: 25px;" (click)="openBillingPage(product)">
+          {{ appContants.BUY }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

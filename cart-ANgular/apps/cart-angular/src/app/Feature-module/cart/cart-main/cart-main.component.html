@@ -1,11 +1,11 @@
 <div *ngIf="appService.messageSuccess" class="alert alert-success custom" role="alert">
-  Item removed from Cart Successfully!
+  {{ appConstants.REMOVE_SUCCESS }}
 </div>
 
 <div *ngIf="!viewFlag && !billingFlag">
   <cart-angular-product-list
     class="cart-main"
-    [pageInput]="cartInput"
+    [pageInput]="appConstants.CART_INPUT"
     (openBillPage)="openBillPage($event)"
     [productList]="products"
     (viewEvent)="viewProduct($event)"
@@ -17,7 +17,7 @@
   <cart-angular-product-detail
     class="product-detail"
     [productDetail]="productDetail"
-    [pageInput]="cartInput"
+    [pageInput]="appConstants.CART_INPUT"
     (addorRemove)="removeProduct()"
     (openBillPage)="openBillPage($event)"
     (closeProduct)="closeProduct()"
